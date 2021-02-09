@@ -11,10 +11,3 @@ def open_data(file):
     return a
 
 
-if __name__ == '__main__':
-    p = open_data("dataP.dat")
-    q = open_data("dataQ.dat")
-
-    print(p, q)
-    plt.plot(p, q, "x")
-    plt.show()
