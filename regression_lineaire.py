@@ -14,7 +14,7 @@ from methode_moindres_carre import *
 
 
 
-def RegressionLineaireEllipse(X,Y):     
+def RegressionLineaireEllipse(X,Y):
     X=[X]
     Y=[Y]
     Xt=np.transpose(X)
@@ -100,6 +100,7 @@ def ComparaisonPolynomeRegression(X,Y,p):
         y.append(P)
     plt.plot(x,y)
     plt.scatter(X,Y)
+    plt.show()
 
 def RegressionLineaireCercle(X,Y):
     """
