@@ -14,7 +14,7 @@ from methode_moindres_carre import *
 
 
 
-def RegressionLineaireEllipse(X,Y):     
+def RegressionLineaireEllipse(X,Y):
     X=[X]
     Y=[Y]
     Xt=np.transpose(X)
