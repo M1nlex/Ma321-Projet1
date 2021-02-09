@@ -1,7 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+# Ajustement linéaire
 
+# Tracer le nuage de points V1
 p = open("dataP.dat", "r")
 q = open("dataQ.dat", "r")
 a = np.zeros(50)
@@ -14,3 +16,5 @@ print(a, b)
 
 plt.plot(a,b, "x")
 plt.show()
+
+#Tracer le nuage de points V2
