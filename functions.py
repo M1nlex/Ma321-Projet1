@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-def open_data(file, length):
+def open_data(file, length):    #inutile
     p = open(file, "r")
     a = np.zeros(length)
     for i in range(length):
