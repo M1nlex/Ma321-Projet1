@@ -100,6 +100,7 @@ def ComparaisonPolynomeRegression(X,Y,p):
         y.append(P)
     plt.plot(x,y)
     plt.scatter(X,Y)
+    plt.show()
 
 def RegressionLineaireCercle(X,Y):
     """
