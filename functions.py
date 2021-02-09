@@ -16,10 +16,6 @@ def open_data(file):
 
 
 # Tracer le nuage de points
-def open_data(file, length):
-    a = np.zeros(length)
-    for i in range(length):
-        a[i] = p.readline()
 
 
 ComparaisonPolynomeRegression(p,q,1)
