@@ -12,9 +12,11 @@ def open_data(file, length):
         a[i] = p.readline()
     return a
 
+# Lecture des données 2
 p=np.loadtxt('dataP.dat')
 q=np.loadtxt('dataQ.dat')
 
 plt.scatter(p,q)
 
+# Approx par une fonction
 ComparaisonPolynomeRegression(p,q,1)
