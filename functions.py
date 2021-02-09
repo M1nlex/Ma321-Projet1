@@ -18,5 +18,3 @@ q=np.loadtxt('dataQ.dat')
 plt.scatter(p,q)
 
 ComparaisonPolynomeRegression(p,q,1)
-
-
