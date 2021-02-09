@@ -59,7 +59,7 @@ def ResolMCQR(A,b):
 
 
 def ResolMCNP(A,b):
-    return np.linalg.lstsq(A,b)[0]
+    return np.linalg.lstsq(A,b,rcond=None)[0]
 
 def ResolMCSVD(A,b):
     """
