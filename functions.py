@@ -3,18 +3,15 @@ import matplotlib.pyplot as plt
 
 # Ajustement linéaire
 
-# Tracer le nuage de points V1
-p = open("dataP.dat", "r")
-q = open("dataQ.dat", "r")
-a = np.zeros(50)
-b = np.zeros(50)
-for i in range(50):
-    a[i] = p.readline()
-    b[i] = q.readline()
+# Tracer le nuage de points
+def open_data(file, length):
+    p = open(file, "r")
+    a = np.zeros(length)
+    for i in range(length):
+        a[i] = p.readline()
+    return a
 
-print(a, b)
+p=np.loadtxt('dataP.dat')
+q=np.loadtxt('dataQ.dat')
 
-plt.plot(a,b, "x")
-plt.show()
-
-#Tracer le nuage de points V2
+plt.scatter(p,q)
