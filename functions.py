@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from regression_lineaire import *
 
 # Ajustement linéaire
 
@@ -15,3 +16,7 @@ p=np.loadtxt('dataP.dat')
 q=np.loadtxt('dataQ.dat')
 
 plt.scatter(p,q)
+
+ComparaisonPolynomeRegression(p,q,1)
+
+
