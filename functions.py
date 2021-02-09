@@ -10,4 +10,8 @@ def open_data(file, length):
 
     return a
 
+p=np.loadtxt('dataP.dat')
+q=np.loadtxt('dataQ.dat')
+
+plt.scatter(p,q)
 
