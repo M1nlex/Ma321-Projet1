@@ -5,7 +5,7 @@ from Projet1 import *
 from mpl_toolkits import mplot3d
 
 met = 1
-pas = 0.001
+pas = 0.1
 #3.4.1.a
 x = np.arange(-10,10.000001,pas)
 y = np.arange(-10,10.000001,pas)
@@ -26,5 +26,5 @@ if met == 0:
     print(c1)
     print(c2)
 if met ==1: # méthode 1
-    res = plt.contour(c1,c2,F)
+    res = plt.contour(c1,c2,F,1000)
     plt.show()
