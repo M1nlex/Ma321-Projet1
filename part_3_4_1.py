@@ -33,3 +33,11 @@ for i in xit:
 plt.plot(tempo_list1,tempo_list2,linewidth=5.0,color='red')
 
 plt.show()
+
+
+
+# 2.2.1.5 a
+
+ax3d = plt.axes(projection='3d')
+ax3d.plot_surface(c1, c2, F)
+plt.show()
