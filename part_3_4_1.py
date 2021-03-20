@@ -18,9 +18,6 @@ X = Creation_de_X(p)
 
 Z = X.T@X
 s = q.T@q
-print(X.T)
-print("----")
-print(q)
 w=X.T@q
 
 F = 0.5 * ( Z[0][0]*(c1**2) + 2*Z[0][1]*c1*c2 + Z[1][1]*(c2**2) - 2*(w[0]*c1 + w[1]*c2) + s )
