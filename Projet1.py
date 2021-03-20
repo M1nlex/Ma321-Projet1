@@ -19,11 +19,13 @@ def representation():
     plt.ylabel("La hauteur des enfants (en m)")
     plt.show()#affichage du graphique
 
+
 def Creation_de_X(p):
-    n=len(p)
-    Un=np.ones((n,1))
-    X=np.concatenate((Un,p),axis=1)
-    return(X)
+    n = len(p)
+    un = np.ones((n, 1))
+    X = np.concatenate((un, np.transpose([p])), axis=1)
+
+    return X
 
 def Det_A():
     X=Creation_de_X(p)
