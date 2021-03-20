@@ -24,10 +24,9 @@ def Creation_de_X(p):
     n = len(p)
     un = np.ones((n, 1))
     X = np.concatenate((un, np.transpose([p])), axis=1)
-
     return X
 
-def Det_A():
+def Det_A(p):
     X=Creation_de_X(p)
     XT=np.transpose(X)
     XTX=np.dot(XT,X)
