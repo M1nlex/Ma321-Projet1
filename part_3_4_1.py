@@ -5,7 +5,7 @@ from Projet1 import *
 from mpl_toolkits import mplot3d
 
 met = 1
-pas = 0.1
+pas = 0.01
 #3.4.1.a
 x = np.arange(-10,10.000001,pas)
 y = np.arange(-10,10.000001,pas)
