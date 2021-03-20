@@ -21,8 +21,11 @@ def representation():
 
 def Creation_de_X(p):
     n=len(p)
-    Un=np.ones((n,1))
-    X=np.concatenate((Un,p),axis=1)
+    un=np.ones((n,1))
+    mx=np.zeros((n,1))
+    for i in range(0,n):
+        mx[i]=p[i]
+    X=np.concatenate((un,mx),axis=1)
     return(X)
 
 def Det_A():
