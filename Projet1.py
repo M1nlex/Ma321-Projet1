@@ -124,7 +124,7 @@ def gradientConjugue(A,b,x0,tol):
     nit=nit+1
 
     while(np.linalg.norm(r)>tol and nit<iMax):
-        print("nit:",nit)
+        #print("nit:",nit)
         iMax=5*10**4
         r=np.dot(A,sol)-b
         R.append(r)
@@ -137,6 +137,7 @@ def gradientConjugue(A,b,x0,tol):
         DT.append(dT)
         rho=np.dot(rT,r)/np.dot(np.dot(dT,A),d)
         sol=sol+rho*d
+        xit.append(sol)
         nit=nit+1
     return(sol,xit,nit)
 
