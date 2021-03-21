@@ -39,12 +39,12 @@ def Det_b(p,q):
 
 
 def val_vect_propres():
-    XTX=Det_A()
+    XTX=Det_A(p)
     Val,Vec =np.linalg.eig(XTX)
     return(Val,Vec)
 
 def conditionnement():
-    XTX=Det_A()
+    XTX=Det_A(p)
     NormeX=np.linalg.norm(XTX)
     NormeinvX=np.linalg.norm(np.linalg.inv(XTX))
     cond=NormeX*NormeinvX
@@ -165,9 +165,9 @@ if __name__=='__main__':
     print("b\n")
 
     condcal=conditionnement()
-    condnp=np.linalg.cond(Det_A())
+    condnp=np.linalg.cond(Det_A(p))
     print("cond(XTX)=",conditionnement())
-    print("le conditionnement selon numpy, cond(XTX)=",np.linalg.cond(Det_A()))
+    print("le conditionnement selon numpy, cond(XTX)=",np.linalg.cond(Det_A(p)))
     print("L'écart relatif des deux conditionnements est de:",diffcond(condcal,condnp)) #plus particulierement, on ne considere qu une precision exacte qu a
     #10^-2 près
 
@@ -191,23 +191,23 @@ if __name__=='__main__':
     print("\n3.2.2 L’algorithme de descente du gradient a pas fixe")
     print("\n4)")
 
-    sol,xit,nit=GradientPasFixe(Det_A(),Det_b(p,q),np.transpose(np.array([-9,-7])),10**(-3),10**(-6))
+    sol,xit,nit=GradientPasFixe(Det_A(p),Det_b(p,q),np.transpose(np.array([-9,-7])),10**(-3),10**(-6))
     print("\n a) la solution est le vecteur :",sol,"elle appartient à la suite (ci)",xit,"on retrouve la solution au bout de",nit,"iterations")
-    sola,xita,nita=GradientPasFixe(Det_A(),Det_b(p,q),np.transpose(np.array([-9,-7])),10**(-1),10**(-6))
+    sola,xita,nita=GradientPasFixe(Det_A(p),Det_b(p,q),np.transpose(np.array([-9,-7])),10**(-1),10**(-6))
     print("\n b) la solution est le vecteur :",sola,"elle appartient à la suite (ci)",xita,"on retrouve la solution au bout de",nita,"iterations pour rho=10^(-1)")
     #pas trop grand: on sort plusieurs fois de la boucle, resultat non représentatif et resultat attendu non atteint
-    solb,xitb,nitb=GradientPasFixe(Det_A(),Det_b(p,q),np.transpose(np.array([-9,-7])),10**(-5),10**(-6))
+    solb,xitb,nitb=GradientPasFixe(Det_A(p),Det_b(p,q),np.transpose(np.array([-9,-7])),10**(-5),10**(-6))
     print("\n b) la solution est le vecteur :",solb,"elle appartient à la suite (ci)",xitb,"on retrouve la solution au bout de",nitb,"iterations pour rho=10^(-5)")
     #pas trop petit: le nombre d'iteration demande est bien trop grand 5000 iterations
 
     print("\n3.2.3 L’algorithme de descente du gradient a pas optimal")
     print("\n6)")
 
-    sol1,xit1,nit1=gradientPasOptimal(Det_A(),Det_b(p,q),np.transpose(np.array([-9,-7])),10**(-6))
+    sol1,xit1,nit1=gradientPasOptimal(Det_A(p),Det_b(p,q),np.transpose(np.array([-9,-7])),10**(-6))
     print("\n a)la solution est le vecteur :",sol1,"elle appartient à la suite (ci)",xit1,"on retrouve la solution au bout de",nit1,"iterations")
     #b)Calcul du pas pour que le nombre d'iteration soit minium donc moins long que la methode du gradient à pas fixe
 
     print("\n3.3.1 Direction du gradient conjugue")
-    sol2,xit2,nit2=gradientConjugue(Det_A(),Det_b(p,q),np.transpose(np.array([-9,-7])),10**(-6))
+    sol2,xit2,nit2=gradientConjugue(Det_A(p),Det_b(p,q),np.transpose(np.array([-9,-7])),10**(-6))
     print("\n a) la solution est le vecteur :",sol2,"elle appartient à la suite (ci)",xit2,"on retrouve la solution au bout de",nit2,"iterations")
     #Nombre d'iteration vraiment tres petit: la methode la mieux optimisee grace a la recherche du coefficient de conjugaison
