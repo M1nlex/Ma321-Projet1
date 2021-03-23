@@ -1,12 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Mar 23 08:20:38 2021
-
-@author: aliel
-"""
-
-# -*- coding: utf-8 -*-
-"""
 Created on Tue Feb  9 08:26:23 2021
 
 @author: aliel
