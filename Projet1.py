@@ -78,6 +78,7 @@ def GradientPasFixe(A,b,x0,rho,tol):
 
     return(sol,xit,nit)
 
+"""
 def gradientPasOptimal(A,b,x0,tol):
     nit=1
     iMax=5*10**4
@@ -100,10 +101,41 @@ def gradientPasOptimal(A,b,x0,tol):
         nit=nit+1
 
     return(sol,xit,nit)
+"""
 
-def gradientConjugue(A,b,x0,tol):
+A=Det_A(p)
+b=Det_b(p, q) 
+x0=np.array([[-9],[-7]])
+
+def GradientPasOptimal(A,b,x0,tol):
+    itmax=5*10**4
+    nite=0
+    xit=[x0]
+    sol=x0
+    r=r=np.dot(A,x0)-np.transpose([b])
+    while (nite<itmax and np.linalg.norm(r)>tol):
+        a=np.linalg.norm(r)**2/np.dot(np.transpose(r), np.dot(A,r))[0][0]
+        sol=sol-a*r
+        r=np.dot(A,sol)-np.transpose([b])
+        nite+=1
+        xit.append(sol)
+    return (sol, xit, nite)
+
+    def courbenombreiteration():
+        N=[]
+        I=[]
+        for k in range(1,13):
+            N.append(GradientPasOptimal(A,b,x0,10**-k)[2])
+            I.append(k)
+        plt.plot(I,N)
+        plt.xlabel("Tolérance (10^)")
+        plt.ylabel("Nombre d'itération")
+        plt.title("Nombre d'itération en fonction de la tolérance")
+        plt.show()
+    
+"""def gradientConjugue(A,b,x0,tol):
     nit=1
-    iMax=5*10**4
+    iMax=5*10**5
     xit=[]
     R=[]
     D=[]
@@ -126,7 +158,7 @@ def gradientConjugue(A,b,x0,tol):
 
     while(np.linalg.norm(r)>tol and nit<iMax):
         #print("nit:",nit)
-        iMax=5*10**4
+        #iMax=5*10**4
         r=np.dot(A,sol)-b
         R.append(r)
         rT=np.transpose(r)
@@ -142,8 +174,28 @@ def gradientConjugue(A,b,x0,tol):
         nit=nit+1
     return(sol,xit,nit)
 
+"""
+def GradientConjugue(x0, e): #Le programme ne donne pas de bon résultat
+    A=Det_A(p)
+    b=Det_b(p,q)
+    itmax=5*10**4
+    nite=0
+    xit=[x0]
+    xk=x0
+    r=np.dot(A,x0)-np.transpose([b])
+    d=-r
+    while (nite<itmax and np.linalg.norm(r)>e):
+        a=-np.dot(np.transpose(r),d)[0][0]/np.dot(np.transpose(d),np.dot(A,d))[0][0]
+        xk=xk+a*d
+        beta=np.dot(np.transpose(r), np.dot(A,d))[0][0]/np.dot(np.transpose(d),np.dot(A,d))[0][0]
+        r=np.dot(A,xk)-np.transpose([b])
+        d=-r+beta*d
+        nite+=1 
+        xit.append(xk)
+    return (nite,xk,xit)
 
-if __name__=='__main__':
+
+if __name__!='__main__':
     #Programme principal
     print("2.1 Formulation et analyse mathematique")
     print("2.1.2 Ajustement lineair")
