@@ -14,8 +14,7 @@ p=np.loadtxt('dataP.dat')
 q=np.loadtxt('dataQ.dat')
 
 
-A=Det_A(p)
-b=Det_b(p,q)
+
 
 def minimum_de_F():         
     x=np.linalg.solve(A,b)
@@ -57,4 +56,36 @@ def pointcritique():
     c=np.array([K,L[0]])
     return c
 
-print (pointcritique())    
+def Gradientconjugue2(x0, e): #Le programme ne donne pas de bon résultat
+    A=Det_A(p)
+    b=Det_b(p,q)
+    itmax=5*10**4
+    nite=0
+    xit=[x0]
+    xk=x0
+    r=np.dot(A,x0)-np.transpose([b])
+    d=-r
+    while (nite<itmax and np.linalg.norm(r)>e):
+        a=-np.dot(np.transpose(r),d)[0][0]/np.dot(np.transpose(d),np.dot(A,d))[0][0]
+        xk=xk+a*d
+        beta=np.dot(np.transpose(r), np.dot(A,d))[0][0]/np.dot(np.transpose(d),np.dot(A,d))[0][0]
+        r=np.dot(A,xk)-np.transpose([b])
+        d=-r+beta*d
+        nite+=1 
+        xit.append(xk)
+    return (nite,xk,xit)
+
+def GradientPasOptimal(A,b,x0,tol):
+    itmax=5*10**4
+    nite=0
+    xit=[x0]
+    xk=x0
+    r=r=np.dot(A,x0)-np.transpose([b])
+    while (nite<itmax and np.linalg.norm(r)>tol):
+        a=np.linalg.norm(r)**2/np.dot(np.transpose(r), np.dot(A,r))[0][0]
+        xk=xk-a*r
+        r=np.dot(A,xk)-np.transpose([b])
+        nite+=1
+        xit.append(xk)
+    return (sol, xit, nit)
+
