@@ -19,6 +19,7 @@ def representation():
     plt.ylabel("La hauteur des enfants (en m)")
     plt.show()#affichage du graphique
 
+p,q=recup_donnees()
 
 def Creation_de_X(p):
     n = len(p)
