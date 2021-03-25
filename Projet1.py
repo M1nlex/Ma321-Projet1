@@ -63,19 +63,17 @@ def GradientPasFixe(A,b,x0,rho,tol):
     xit=[]
     r=0
     sol=x0
-    r=np.dot(A,x0)-b
+    r=np.dot(A,x0)-np.transpose([b])
     d=-r
     sol=sol+rho*d
     xit.append(sol)
     nit=nit+1
     while(np.linalg.norm(r)>tol and nit<iMax):
-        r=np.dot(A,sol)-b
+        r=np.dot(A,sol)-np.transpose([b])
         d=-r
         sol=sol+rho*d
         xit.append(sol)
         nit=nit+1
-
-
     return(sol,xit,nit)
 
 """
@@ -175,7 +173,7 @@ def GradientPasOptimal(A,b,x0,tol):
     return(sol,xit,nit)
 
 """
-def GradientConjugue(x0, e): #Le programme ne donne pas de bon résultat
+def GradientConjugue(x0, e): 
     A=Det_A(p)
     b=Det_b(p,q)
     itmax=5*10**4
