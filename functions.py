@@ -16,7 +16,7 @@ def open_data(file, length):
 p=np.loadtxt('dataP.dat')
 q=np.loadtxt('dataQ.dat')
 
-plt.scatter(p,q)
+#plt.scatter(p,q)
 
 # Approx par une fonction
-ComparaisonPolynomeRegression(p,q,1)
+#ComparaisonPolynomeRegression(p,q,1)
