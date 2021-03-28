@@ -78,9 +78,6 @@ def q_3_4_1_2(qsuivante=1):
     plt.plot(tempo_list31, tempo_list32, linewidth=1.0, color='green', label='Conjugue ('+str(nit3)+' itérations)')
 
     plt.legend(loc="lower right")
-    # --------------------------------------
-    # 3.4.1.3
-    # --------------------------------------
     plt.show()
 
 
