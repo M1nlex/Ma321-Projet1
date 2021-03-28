@@ -11,21 +11,22 @@ from mpl_toolkits import mplot3d
 import random as rdm
 from methode_moindres_carre import *
 
+
 # --------------------------------------
 # Graphique page de garde
 # --------------------------------------
 def ImagePageDeGarde():
-    fig = plt.figure(figsize=(8,6))
+    fig = plt.figure(figsize=(8, 6))
     ax3d = plt.axes(projection="3d")
 
-    xdata = np.linspace(-100,100,1000)
-    ydata = np.linspace(-100,100,1000)
-    X,Y = np.meshgrid(xdata,ydata)
-    Z = X**2 + Y**2 -X*Y - X - Y
-    #Z = np.sin(X)*np.cos(Y)
+    xdata = np.linspace(-100, 100, 1000)
+    ydata = np.linspace(-100, 100, 1000)
+    X, Y = np.meshgrid(xdata, ydata)
+    Z = X ** 2 + Y ** 2 - X * Y - X - Y
+    # Z = np.sin(X)*np.cos(Y)
 
     ax3d = plt.axes(projection='3d')
-    ax3d.plot_surface(X, Y, Z,cmap='plasma')
+    ax3d.plot_surface(X, Y, Z, cmap='plasma')
     ax3d.set_title('X**2 + Y**2 -X*Y - X - Y')
     ax3d.set_xlabel('X')
     ax3d.set_ylabel('Y')
@@ -33,24 +34,27 @@ def ImagePageDeGarde():
 
     plt.show()
 
+
 # --------------------------------------
 # 2.1.2.1
 # --------------------------------------
 def recup_donnees():
-    p=np.loadtxt("./dataP.dat")#extraction et mise dans une variable des donnees
-    q=np.loadtxt("./dataQ.dat")#extraction et mise dans une variable des donnees
-    return(p,q)
+    p = np.loadtxt("./dataP.dat")  # extraction et mise dans une variable des donnees
+    q = np.loadtxt("./dataQ.dat")  # extraction et mise dans une variable des donnees
+    return (p, q)
+
 
 # --------------------------------------
 # 2.1.2.1 (bonus)
 # --------------------------------------
 def representation():
-    [p,q]=recup_donnees()
-    plt.scatter(p,q)#representation du nuage de point des deux series de donnees
+    [p, q] = recup_donnees()
+    plt.scatter(p, q)  # representation du nuage de point des deux series de donnees
     plt.xlabel("L age des enfants (en annee)")
     plt.ylabel("La hauteur des enfants (en m)")
-    #affichage du graphique
+    # affichage du graphique
     plt.show()
+
 
 # --------------------------------------
 # 2.1.2.5
@@ -60,15 +64,20 @@ def Creation_de_X(p):
     un = np.ones((n, 1))
     X = np.concatenate((un, np.transpose([p])), axis=1)
     return X
+
+
 def Det_A(p):
-    X=Creation_de_X(p)
-    XT=np.transpose(X)
-    XTX=np.dot(XT,X)
-    return(XTX)
-def Det_b(p,q):
-    XT=np.transpose(Creation_de_X(p))
-    XTq=np.dot(XT,q)
-    return(XTq)
+    X = Creation_de_X(p)
+    XT = np.transpose(X)
+    XTX = np.dot(XT, X)
+    return (XTX)
+
+
+def Det_b(p, q):
+    XT = np.transpose(Creation_de_X(p))
+    XTq = np.dot(XT, q)
+    return (XTq)
+
 
 # --------------------------------------
 # 2.2.1.1.a
@@ -82,14 +91,17 @@ def val_vect_propres(p):
 # 2.2.1.1.b
 # --------------------------------------
 def conditionnement():
-    lM=max(abs(val_vect_propres()[0]))
-    lm=min(abs(val_vect_propres()[0]))
-    return(lM/lm)
-def diffcond(cond1,cond2):
-    #on considère que le conditionnement calcule par numpy est plus proche de
-    #la réalité
-    diff=(abs(cond1-cond2)/cond2)*100
-    return(diff)
+    lM = max(abs(val_vect_propres()[0]))
+    lm = min(abs(val_vect_propres()[0]))
+    return (lM / lm)
+
+
+def diffcond(cond1, cond2):
+    # on considère que le conditionnement calcule par numpy est plus proche de
+    # la réalité
+    diff = (abs(cond1 - cond2) / cond2) * 100
+    return (diff)
+
 
 # --------------------------------------
 # 2.2.1.3.f
@@ -110,17 +122,18 @@ def fonction_partielles(A,b):
     D=[e1,e2,v1,v2]
     i=1
     for d in D:
-        K=[]
+        K = []
         for t in I:
-            k=0.5*np.dot(np.transpose(d),np.dot(A,d))*t*t
-            m=minimum_de_F(A,b)[0]
-            F=(k+m)[0]
+            k = 0.5 * np.dot(np.transpose(d), np.dot(A, d)) * t * t
+            m = minimum_de_F()[0]
+            F = (k + m)[0]
             K.append(F)
-        plt.plot(I,K)
+        plt.plot(I, K)
         plt.xlabel("t")
         plt.ylabel("F(c*+td)")
-        plt.title("Courbe de la fonction partielle en c* suivant"+str(d))
+        plt.title("Courbe de la fonction partielle en c* suivant" + str(d))
         plt.show()
+
 
 # --------------------------------------
 # 2.2.1.4.b
@@ -147,6 +160,7 @@ def q_2_2_1_4():
 
     plt.show()
 
+
 # --------------------------------------
 # 2.2.1.5.a
 # --------------------------------------
@@ -171,45 +185,48 @@ def q_2_2_1_5():
 
     plt.show()
 
+
 # --------------------------------------
 # 3.2.2.4.a
 # --------------------------------------
-def GradientPasFixe(A,b,x0,rho,tol):
-    nit=1
-    iMax=5*10**4
-    xit=[]
-    r=0
-    sol=x0
-    r=np.dot(A,x0)-np.transpose([b])
-    d=-r
-    sol=sol+rho*d
+def GradientPasFixe(A, b, x0, rho, tol):
+    nit = 1
+    iMax = 5 * 10 ** 4
+    xit = []
+    r = 0
+    sol = x0
+    r = np.dot(A, x0) - np.transpose([b])
+    d = -r
+    sol = sol + rho * d
     xit.append(sol)
-    nit=nit+1
-    while(np.linalg.norm(r)>tol and nit<iMax):
-        r=np.dot(A,sol)-np.transpose([b])
-        d=-r
-        sol=sol+rho*d
+    nit = nit + 1
+    while (np.linalg.norm(r) > tol and nit < iMax):
+        r = np.dot(A, sol) - np.transpose([b])
+        d = -r
+        sol = sol + rho * d
         xit.append(sol)
-        nit=nit+1
-    return(sol,xit,nit)
+        nit = nit + 1
+    return (sol, xit, nit)
+
 
 # --------------------------------------
 # 3.2.3.6.a
 # --------------------------------------
-def GradientPasOptimal(A,b,x0,tol):
-    itmax=5*10**4
-    nit=0
-    xit=[x0]
-    sol=x0
+def GradientPasOptimal(A, b, x0, tol):
+    itmax = 5 * 10 ** 4
+    nit = 0
+    xit = [x0]
+    sol = x0
     xit.append(sol)
-    r=np.dot(A,x0)-np.transpose([b])
-    while (nit<itmax and np.linalg.norm(r)>tol):
-        a=np.linalg.norm(r)**2/np.dot(np.transpose(r), np.dot(A,r))[0][0]
-        sol=sol-a*r
-        r=np.dot(A,sol)-np.transpose([b])
-        nit+=1
+    r = np.dot(A, x0) - np.transpose([b])
+    while (nit < itmax and np.linalg.norm(r) > tol):
+        a = np.linalg.norm(r) ** 2 / np.dot(np.transpose(r), np.dot(A, r))[0][0]
+        sol = sol - a * r
+        r = np.dot(A, sol) - np.transpose([b])
+        nit += 1
         xit.append(sol)
     return (sol, xit, nit)
+
 
 # --------------------------------------
 # 3.2.3.6.c
@@ -220,31 +237,33 @@ def courbenombreiteration(A,b,x0):
     for k in range(1,13):
         N.append(GradientPasOptimal(A,b,x0,10**-k)[2])
         I.append(k)
-    plt.plot(I,N)
+    plt.plot(I, N)
     plt.xlabel("Tolérance (10^)")
     plt.ylabel("Nombre d'itération")
     plt.title("Nombre d'itération en fonction de la tolérance")
     plt.show()
 
+
 # --------------------------------------
 # 3.3.2.5
 # --------------------------------------
-def GradientConjugue(A,b,x0, e):
-    itmax=5*10**4
-    nit=0
-    xit=[x0]
-    sol=x0
-    r=np.dot(A,x0)-np.transpose([b])
-    d=-r
-    while (nit<itmax and np.linalg.norm(r)>e):
-        a=-np.dot(np.transpose(r),d)[0][0]/np.dot(np.transpose(d),np.dot(A,d))[0][0]
-        sol=sol+a*d
-        beta=np.dot(np.transpose(r), np.dot(A,d))[0][0]/np.dot(np.transpose(d),np.dot(A,d))[0][0]
-        r=np.dot(A,sol)-np.transpose([b])
-        d=-r+beta*d
-        nit+=1
+def GradientConjugue(A, b, x0, e):
+    itmax = 5 * 10 ** 4
+    nit = 0
+    xit = [x0]
+    sol = x0
+    r = np.dot(A, x0) - np.transpose([b])
+    d = -r
+    while (nit < itmax and np.linalg.norm(r) > e):
+        a = -np.dot(np.transpose(r), d)[0][0] / np.dot(np.transpose(d), np.dot(A, d))[0][0]
+        sol = sol + a * d
+        beta = np.dot(np.transpose(r), np.dot(A, d))[0][0] / np.dot(np.transpose(d), np.dot(A, d))[0][0]
+        r = np.dot(A, sol) - np.transpose([b])
+        d = -r + beta * d
+        nit += 1
         xit.append(sol)
-    return (sol,xit,nit)
+    return (sol, xit, nit)
+
 
 # --------------------------------------
 # 3.4.1.1
@@ -281,6 +300,7 @@ def q_3_4_1_1():
     plt.plot(tempo_list11, tempo_list12, linewidth=1.0, color='red')
 
     plt.show()
+
 
 # --------------------------------------
 # 3.4.1.2
