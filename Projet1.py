@@ -63,10 +63,10 @@ def minimum_de_F():     #Partie 2, 2.2.1, question 3.f)  (on utilise cette fonct
     return k-l+m
 
 
-def fonction_partielles(): #Partie 2, 2.2.1, question 3.f)  
+def fonction_partielles(): #Partie 2, 2.2.1, question 3.f)
     e1=np.array([[0],[1]])
     e2=np.array([[1],[0]])
-    v1,v2=val_vect_propres()[1] 
+    v1,v2=val_vect_propres()[1]
     v1=np.transpose([v1])
     v2=np.transpose([v2])
     I=np.linspace(-10,10,10000)
@@ -149,7 +149,6 @@ def GradientPasOptimal(A,b,x0,tol):     #Partie 3, 3.2.3, question 6.a)
     return (sol, xit, nit)
 
 def courbenombreiteration():    #Partie 3, 3.2.3, question 6. c)
->>>>>>> Stashed changes
     N=[]
     I=[]
     for k in range(1,13):
@@ -217,7 +216,7 @@ def GradientConjugue(A,b,x0, e):    #Partie 3, 3.3.2, question 5.
         beta=np.dot(np.transpose(r), np.dot(A,d))[0][0]/np.dot(np.transpose(d),np.dot(A,d))[0][0]
         r=np.dot(A,sol)-np.transpose([b])
         d=-r+beta*d
-        nit+=1 
+        nit+=1
         xit.append(sol)
     return (sol,xit,nit)
 
