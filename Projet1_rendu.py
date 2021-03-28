@@ -331,7 +331,7 @@ def q_3_4_1_2():
     plt.plot(tempo_list21, tempo_list22, linewidth=1.0, color='blue', label='Pas fixe (' + str(nit2) + ' itérations)')
 
     # méthode 3
-    nit3, sol3, xit3 = GradientConjugue(c0, 10 ** (-5))
+    sol3, xit3, nit3 = GradientConjugue(Det_A(p), Det_b(p,q), c0, 10**(-5))
     tempo_list31 = []
     tempo_list32 = []
     for i in xit3:
@@ -340,4 +340,10 @@ def q_3_4_1_2():
     plt.plot(tempo_list31, tempo_list32, linewidth=1.0, color='green', label='Conjugue (' + str(nit3) + ' itérations)')
 
     plt.legend(loc="lower right")
+    plt.title('Evolution de la solution à chaque itération')
+    plt.xlabel('X')
+    plt.ylabel('Y')
     plt.show()
+
+if __name__ == '__main__':
+    q_3_4_1_1()
