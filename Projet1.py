@@ -8,11 +8,11 @@ import numpy as np
 from math import *
 import matplotlib.pyplot as plt
 
-def recup_donnees():
+def recup_donnees():    #Partie 2, 2.1.2, question 1.
     p=np.loadtxt("./dataP.dat")#extraction et mise dans une variable des donnees
     q=np.loadtxt("./dataQ.dat")#extraction et mise dans une variable des donnees
     return(p,q)
-def representation():
+def representation():   #bonus question précédente
     [p,q]=recup_donnees()
     plt.scatter(p,q)#representation du nuage de point des deux series de donnees
     plt.xlabel("L age des enfants (en annee)")
@@ -21,43 +21,41 @@ def representation():
 
 p,q=recup_donnees()
 
-def Creation_de_X(p):
+def Creation_de_X(p):   #Partie 2, 2.1.2, question 5.
     n = len(p)
     un = np.ones((n, 1))
     X = np.concatenate((un, np.transpose([p])), axis=1)
     return X
 
-def Det_A(p):
+def Det_A(p):           #Partie 2, 2.1.2, question 5.
     X=Creation_de_X(p)
     XT=np.transpose(X)
     XTX=np.dot(XT,X)
     return(XTX)
 
-def Det_b(p,q):
+def Det_b(p,q):         #Partie 2, 2.1.2, question 5.
     XT=np.transpose(Creation_de_X(p))
     XTq=np.dot(XT,q)
     return(XTq)
 
 
-def val_vect_propres():
+def val_vect_propres(): #Partie 2, 2.2.1, question 1.a)
     XTX=Det_A(p)
     Val,Vec =np.linalg.eig(XTX)
     return(Val,Vec)
 
-def conditionnement():
-    XTX=Det_A(p)
-    NormeX=np.linalg.norm(XTX)
-    NormeinvX=np.linalg.norm(np.linalg.inv(XTX))
-    cond=NormeX*NormeinvX
-    return(cond)
+def conditionnement():  #Partie 2, 2.2.1, question 1.b)
+    lM=max(abs(val_vect_propres()[0]))
+    lm=min(abs(val_vect_propres()[0]))
+    return(lM/lm)
 
-def diffcond(cond1,cond2):
+def diffcond(cond1,cond2):      #Demander à Elena pour le num de la question
     #on considère que le conditionnement calcule par numpy est plus proche de
     #la réalité
     diff=(abs(cond1-cond2)/cond2)*100
     return(diff)
 
-def GradientPasFixe(A,b,x0,rho,tol):
+def GradientPasFixe(A,b,x0,rho,tol):        #Partie 3, 3.2.2, question 4.a)
     nit=1
     iMax=5*10**4
     xit=[]
@@ -105,15 +103,10 @@ A=Det_A(p)
 b=Det_b(p, q)
 x0=np.array([[-9],[-7]])
 
-def GradientPasOptimal(A,b,x0,tol):     #Partie 3
+def GradientPasOptimal(A,b,x0,tol):     #Partie 3, 3.2.3, question 6.a)
     itmax=5*10**4
-<<<<<<< Updated upstream
-    nite=0
-    xit=[]
-=======
     nit=0
     xit=[x0]
->>>>>>> Stashed changes
     sol=x0
     xit.append(sol)
     r=np.dot(A,x0)-np.transpose([b])
@@ -123,11 +116,6 @@ def GradientPasOptimal(A,b,x0,tol):     #Partie 3
         r=np.dot(A,sol)-np.transpose([b])
         nit+=1
         xit.append(sol)
-<<<<<<< Updated upstream
-    return (sol, xit, nite)
-
-def courbenombreiteration():
-=======
     return (sol, xit, nit)
 
 def courbenombreiteration():    #Partie 3, 3.2.3, question 6. c)
@@ -185,13 +173,8 @@ def courbenombreiteration():    #Partie 3, 3.2.3, question 6. c)
     return(sol,xit,nit)
 
 """
-<<<<<<< Updated upstream
-def GradientConjugue(x0, e):
-    A=Det_A(p)
-    b=Det_b(p,q)
-=======
+
 def GradientConjugue(A,b,x0, e):    #Partie 3, 3.3.2, question 5.
->>>>>>> Stashed changes
     itmax=5*10**4
     nit=0
     xit=[x0]
@@ -204,15 +187,10 @@ def GradientConjugue(A,b,x0, e):    #Partie 3, 3.3.2, question 5.
         beta=np.dot(np.transpose(r), np.dot(A,d))[0][0]/np.dot(np.transpose(d),np.dot(A,d))[0][0]
         r=np.dot(A,sol)-np.transpose([b])
         d=-r+beta*d
-<<<<<<< Updated upstream
-        nite+=1
-        xit.append(xk)
-    return (nite,xk,xit)
-=======
         nit+=1 
         xit.append(sol)
     return (sol,xit,nit)
->>>>>>> Stashed changes
+
 
 
 if __name__=='__main__':
