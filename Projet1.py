@@ -105,10 +105,15 @@ A=Det_A(p)
 b=Det_b(p, q)
 x0=np.array([[-9],[-7]])
 
-def GradientPasOptimal(A,b,x0,tol):
+def GradientPasOptimal(A,b,x0,tol):     #Partie 3
     itmax=5*10**4
+<<<<<<< Updated upstream
     nite=0
     xit=[]
+=======
+    nit=0
+    xit=[x0]
+>>>>>>> Stashed changes
     sol=x0
     xit.append(sol)
     r=np.dot(A,x0)-np.transpose([b])
@@ -116,11 +121,17 @@ def GradientPasOptimal(A,b,x0,tol):
         a=np.linalg.norm(r)**2/np.dot(np.transpose(r), np.dot(A,r))[0][0]
         sol=sol-a*r
         r=np.dot(A,sol)-np.transpose([b])
-        nite+=1
+        nit+=1
         xit.append(sol)
+<<<<<<< Updated upstream
     return (sol, xit, nite)
 
 def courbenombreiteration():
+=======
+    return (sol, xit, nit)
+
+def courbenombreiteration():    #Partie 3, 3.2.3, question 6. c)
+>>>>>>> Stashed changes
     N=[]
     I=[]
     for k in range(1,13):
@@ -174,24 +185,34 @@ def courbenombreiteration():
     return(sol,xit,nit)
 
 """
+<<<<<<< Updated upstream
 def GradientConjugue(x0, e):
     A=Det_A(p)
     b=Det_b(p,q)
+=======
+def GradientConjugue(A,b,x0, e):    #Partie 3, 3.3.2, question 5.
+>>>>>>> Stashed changes
     itmax=5*10**4
-    nite=0
+    nit=0
     xit=[x0]
-    xk=x0
+    sol=x0
     r=np.dot(A,x0)-np.transpose([b])
     d=-r
-    while (nite<itmax and np.linalg.norm(r)>e):
+    while (nit<itmax and np.linalg.norm(r)>e):
         a=-np.dot(np.transpose(r),d)[0][0]/np.dot(np.transpose(d),np.dot(A,d))[0][0]
-        xk=xk+a*d
+        sol=sol+a*d
         beta=np.dot(np.transpose(r), np.dot(A,d))[0][0]/np.dot(np.transpose(d),np.dot(A,d))[0][0]
-        r=np.dot(A,xk)-np.transpose([b])
+        r=np.dot(A,sol)-np.transpose([b])
         d=-r+beta*d
+<<<<<<< Updated upstream
         nite+=1
         xit.append(xk)
     return (nite,xk,xit)
+=======
+        nit+=1 
+        xit.append(sol)
+    return (sol,xit,nit)
+>>>>>>> Stashed changes
 
 
 if __name__=='__main__':
