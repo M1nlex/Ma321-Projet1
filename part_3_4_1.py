@@ -14,9 +14,9 @@ def q_3_4_1_1():
     x = np.arange(-10,10.000001,pas)
     y = np.arange(-10,10.000001,pas)
     c1,c2 = np.meshgrid(x,y)
-    c0 = np.array([[-9],[-7]])
 
         #3.4.1.1.b
+    c0 = np.array([[-9],[-7]])
     p,q = recup_donnees()
     X = Creation_de_X(p)
     Z = X.T@X
@@ -53,11 +53,6 @@ def q_3_4_1_2(qsuivante=1):
     sol1,xit1,nit1 = GradientPasOptimal(Det_A(p),Det_b(p,q),c0,10**(-5))
     tempo_list11 = []
     tempo_list12 = []
-    """
-    print(sol1)
-    print(xit1)
-    print("----------")
-    """
     for i in xit1:
         tempo_list11.append( i[0][0] )
         tempo_list12.append( i[1][0] )
@@ -67,11 +62,6 @@ def q_3_4_1_2(qsuivante=1):
     sol2,xit2,nit2 = GradientPasFixe(Det_A(p), Det_b(p,q), c0, 10**(-3), 10**(-6))
     tempo_list21 = []
     tempo_list22 = []
-    """
-    print(sol2)
-    print(xit2)
-    print("----------")
-    """
     for i in xit2:
         tempo_list21.append( i[0] )
         tempo_list22.append( i[1] )
@@ -82,11 +72,6 @@ def q_3_4_1_2(qsuivante=1):
     nit3,sol3,xit3 = GradientConjugue(c0 , 10**(-5))
     tempo_list31 = []
     tempo_list32 = []
-    """
-    print(sol3)
-    print(xit3)
-    print("----------")
-    """
     for i in xit3:
         tempo_list31.append( i[0] )
         tempo_list32.append( i[1] )
