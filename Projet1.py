@@ -49,7 +49,7 @@ def conditionnement():  #Partie 2, 2.2.1, question 1.b)
     lm=min(abs(val_vect_propres()[0]))
     return(lM/lm)
 
-def diffcond(cond1,cond2):      #Demander à Elena pour le num de la question
+def diffcond(cond1,cond2):      #Partie 2, 2.2.1, question 1.b)
     #on considère que le conditionnement calcule par numpy est plus proche de
     #la réalité
     diff=(abs(cond1-cond2)/cond2)*100
