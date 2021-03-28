@@ -83,9 +83,10 @@ def Det_b(p, q):
 # 2.2.1.1.a
 # --------------------------------------
 def val_vect_propres(p):
-    XTX=Det_A(p)
-    Val,Vec =np.linalg.eig(XTX)
-    return(Val,Vec)
+    XTX = Det_A(p)
+    Val, Vec = np.linalg.eig(XTX)
+    return (Val, Vec)
+
 
 # --------------------------------------
 # 2.2.1.1.b
@@ -106,21 +107,23 @@ def diffcond(cond1, cond2):
 # --------------------------------------
 # 2.2.1.3.f
 # --------------------------------------
-def minimum_de_F(A,b):
-    x=np.linalg.solve(A,b)
-    k=0.5*np.dot(x, np.dot(A,np.transpose([x])))
-    l=np.dot(b, np.transpose([x]))
-    m=0.5*np.linalg.norm(q)**2
-    return k-l+m
-def fonction_partielles(A,b):
-    e1=np.array([[0],[1]])
-    e2=np.array([[1],[0]])
-    v1,v2=val_vect_propres()[1]
-    v1=np.transpose([v1])
-    v2=np.transpose([v2])
-    I=np.linspace(-10,10,10000)
-    D=[e1,e2,v1,v2]
-    i=1
+def minimum_de_F(A, b, q):
+    x = np.linalg.solve(A, b)
+    k = 0.5 * np.dot(x, np.dot(A, np.transpose([x])))
+    l = np.dot(b, np.transpose([x]))
+    m = 0.5 * np.linalg.norm(q) ** 2
+    return k - l + m
+
+
+def fonction_partielles(A, b):
+    e1 = np.array([[0], [1]])
+    e2 = np.array([[1], [0]])
+    v1, v2 = val_vect_propres()[1]
+    v1 = np.transpose([v1])
+    v2 = np.transpose([v2])
+    I = np.linspace(-10, 10, 10000)
+    D = [e1, e2, v1, v2]
+    i = 1
     for d in D:
         K = []
         for t in I:
@@ -231,11 +234,11 @@ def GradientPasOptimal(A, b, x0, tol):
 # --------------------------------------
 # 3.2.3.6.c
 # --------------------------------------
-def courbenombreiteration(A,b,x0):
-    N=[]
-    I=[]
-    for k in range(1,13):
-        N.append(GradientPasOptimal(A,b,x0,10**-k)[2])
+def courbenombreiteration(A, b, x0):
+    N = []
+    I = []
+    for k in range(1, 13):
+        N.append(GradientPasOptimal(A, b, x0, 10 ** -k)[2])
         I.append(k)
     plt.plot(I, N)
     plt.xlabel("Tolérance (10^)")
