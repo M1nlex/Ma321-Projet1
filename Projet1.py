@@ -55,6 +55,36 @@ def diffcond(cond1,cond2):      #Demander à Elena pour le num de la question
     diff=(abs(cond1-cond2)/cond2)*100
     return(diff)
 
+def minimum_de_F():     #Partie 2, 2.2.1, question 3.f)  (on utilise cette fonction pour la fonction après, pour tracer les fonctions partielles)
+    x=np.linalg.solve(A,b)
+    k=0.5*np.dot(x, np.dot(A,np.transpose([x])))
+    l=np.dot(b, np.transpose([x]))
+    m=0.5*np.linalg.norm(q)**2
+    return k-l+m
+
+
+def fonction_partielles(): #Partie 2, 2.2.1, question 3.f)  
+    e1=np.array([[0],[1]])
+    e2=np.array([[1],[0]])
+    v1,v2=val_vect_propres()[1] 
+    v1=np.transpose([v1])
+    v2=np.transpose([v2])
+    I=np.linspace(-10,10,10000)
+    D=[e1,e2,v1,v2]
+    i=1
+    for d in D:
+        K=[]
+        for t in I:
+            k=0.5*np.dot(np.transpose(d),np.dot(A,d))*t*t
+            m=minimum_de_F()[0]
+            F=(k+m)[0]
+            K.append(F)
+        plt.plot(I,K)
+        plt.xlabel("t")
+        plt.ylabel("F(c*+td)")
+        plt.title("Courbe de la fonction partielle en c* suivant"+str(d))
+        plt.show()
+
 def GradientPasFixe(A,b,x0,rho,tol):        #Partie 3, 3.2.2, question 4.a)
     nit=1
     iMax=5*10**4
