@@ -8,9 +8,9 @@ from mpl_toolkits import mplot3d
 # 3.4.1.1
 # --------------------------------------
 def q_3_4_1_1():
-    pas = 0.01
-
+    
         #3.4.1.1.a
+    pas = 0.01
     x = np.arange(-10,10.000001,pas)
     y = np.arange(-10,10.000001,pas)
     c1,c2 = np.meshgrid(x,y)
