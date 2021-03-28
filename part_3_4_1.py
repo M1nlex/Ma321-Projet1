@@ -8,7 +8,7 @@ from mpl_toolkits import mplot3d
 # 3.4.1.1
 # --------------------------------------
 def q_3_4_1_1():
-    
+
         #3.4.1.1.a
     pas = 0.01
     x = np.arange(-10,10.000001,pas)
@@ -81,11 +81,6 @@ def q_3_4_1_2(qsuivante=1):
     # --------------------------------------
     # 3.4.1.3
     # --------------------------------------
-    print("----------")
-    print("pas opti : "+str(nit1))
-    print("pas fixe : "+str(nit2))
-    print("conjugue : "+str(nit3))
-    print("----------")
     plt.show()
 
 
