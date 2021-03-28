@@ -7,14 +7,14 @@ from mpl_toolkits import mplot3d
 # --------------------------------------
 # 3.4.1.1
 # --------------------------------------
-def q3_4_1_1():
+def q_3_4_1_1():
     pas = 0.01
 
         #3.4.1.1.a
     x = np.arange(-10,10.000001,pas)
     y = np.arange(-10,10.000001,pas)
     c1,c2 = np.meshgrid(x,y)
-    c0 = np.transpose(np.array([-9,-7]))
+    c0 = np.array([[-9],[-7]])
 
         #3.4.1.1.b
     p,q = recup_donnees()
@@ -31,12 +31,12 @@ def q3_4_1_1():
     plt.ylabel('Y')
 
         # 3.4.1.1.c
-    sol1,xit1,nit1 = gradientPasOptimal(Det_A(p),Det_b(p,q),c0,10**(-5))
+    sol1,xit1,nit1 = GradientPasOptimal(Det_A(p),Det_b(p,q),c0,10**(-5))
     tempo_list11 = []
     tempo_list12 = []
     for i in xit1:
-        tempo_list11.append( i[0] )
-        tempo_list12.append( i[1] )
+        tempo_list11.append( i[0][0] )
+        tempo_list12.append( i[1][0] )
     plt.plot(tempo_list11, tempo_list12, linewidth=1.0, color='red')
 
     plt.show()
@@ -46,22 +46,32 @@ def q3_4_1_1():
 # --------------------------------------
 def q_3_4_1_2(qsuivante=1):
 
-    c0 = np.transpose(np.array([-9,-7]))
+    c0 = np.array([[-9],[-7]])
     p,q = recup_donnees()
 
     # méthode 1
-    sol1,xit1,nit1 = gradientPasOptimal(Det_A(p),Det_b(p,q),c0,10**(-5))
+    sol1,xit1,nit1 = GradientPasOptimal(Det_A(p),Det_b(p,q),c0,10**(-5))
     tempo_list11 = []
     tempo_list12 = []
+    """
+    print(sol1)
+    print(xit1)
+    print("----------")
+    """
     for i in xit1:
-        tempo_list11.append( i[0] )
-        tempo_list12.append( i[1] )
+        tempo_list11.append( i[0][0] )
+        tempo_list12.append( i[1][0] )
     plt.plot(tempo_list11, tempo_list12, linewidth=1.0, color='red', label='Pas opti ('+str(nit1)+' itérations)')
 
     # méthode 2
-    sol2,xit2,nit2 = GradientPasFixe(Det_A(p), Det_b(p,q), c0, 10**(-5), 10**(-5))
+    sol2,xit2,nit2 = GradientPasFixe(Det_A(p), Det_b(p,q), c0, 10**(-3), 10**(-6))
     tempo_list21 = []
     tempo_list22 = []
+    """
+    print(sol2)
+    print(xit2)
+    print("----------")
+    """
     for i in xit2:
         tempo_list21.append( i[0] )
         tempo_list22.append( i[1] )
@@ -69,9 +79,14 @@ def q_3_4_1_2(qsuivante=1):
 
 
     # méthode 3
-    sol3,xit3,nit3 = gradientConjugue(Det_A(p),Det_b(p,q),c0,10**(-5))
+    nit3,sol3,xit3 = GradientConjugue(c0 , 10**(-5))
     tempo_list31 = []
     tempo_list32 = []
+    """
+    print(sol3)
+    print(xit3)
+    print("----------")
+    """
     for i in xit3:
         tempo_list31.append( i[0] )
         tempo_list32.append( i[1] )
@@ -95,9 +110,9 @@ def q_3_4_1_2(qsuivante=1):
 def q_3_4_1_3():
     # Calculée à partir de la question précédente
     print("----------")
-    print("pas opti : "+str(9))
-    print("pas fixe : "+str(50000))
-    print("conjugue : "+str(4))
+    print("pas opti : "+str(7))
+    print("pas fixe : "+str(3369))
+    print("conjugue : "+str(30))
     print("----------")
 
 # --------------------------------------
