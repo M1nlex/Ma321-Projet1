@@ -73,7 +73,7 @@ def Det_b(p,q):
 # --------------------------------------
 # 2.2.1.1.a
 # --------------------------------------
-def val_vect_propres():
+def val_vect_propres(p):
     XTX=Det_A(p)
     Val,Vec =np.linalg.eig(XTX)
     return(Val,Vec)
@@ -94,13 +94,13 @@ def diffcond(cond1,cond2):
 # --------------------------------------
 # 2.2.1.3.f
 # --------------------------------------
-def minimum_de_F():
+def minimum_de_F(A,b):
     x=np.linalg.solve(A,b)
     k=0.5*np.dot(x, np.dot(A,np.transpose([x])))
     l=np.dot(b, np.transpose([x]))
     m=0.5*np.linalg.norm(q)**2
     return k-l+m
-def fonction_partielles():
+def fonction_partielles(A,b):
     e1=np.array([[0],[1]])
     e2=np.array([[1],[0]])
     v1,v2=val_vect_propres()[1]
@@ -113,7 +113,7 @@ def fonction_partielles():
         K=[]
         for t in I:
             k=0.5*np.dot(np.transpose(d),np.dot(A,d))*t*t
-            m=minimum_de_F()[0]
+            m=minimum_de_F(A,b)[0]
             F=(k+m)[0]
             K.append(F)
         plt.plot(I,K)
@@ -203,7 +203,7 @@ def GradientPasOptimal(A,b,x0,tol):
     sol=x0
     xit.append(sol)
     r=np.dot(A,x0)-np.transpose([b])
-    while (nite<itmax and np.linalg.norm(r)>tol):
+    while (nit<itmax and np.linalg.norm(r)>tol):
         a=np.linalg.norm(r)**2/np.dot(np.transpose(r), np.dot(A,r))[0][0]
         sol=sol-a*r
         r=np.dot(A,sol)-np.transpose([b])
@@ -214,7 +214,7 @@ def GradientPasOptimal(A,b,x0,tol):
 # --------------------------------------
 # 3.2.3.6.c
 # --------------------------------------
-def courbenombreiteration():
+def courbenombreiteration(A,b,x0):
     N=[]
     I=[]
     for k in range(1,13):

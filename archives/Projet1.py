@@ -140,7 +140,7 @@ def GradientPasOptimal(A,b,x0,tol):     #Partie 3, 3.2.3, question 6.a)
     sol=x0
     xit.append(sol)
     r=np.dot(A,x0)-np.transpose([b])
-    while (nite<itmax and np.linalg.norm(r)>tol):
+    while (nit<itmax and np.linalg.norm(r)>tol):
         a=np.linalg.norm(r)**2/np.dot(np.transpose(r), np.dot(A,r))[0][0]
         sol=sol-a*r
         r=np.dot(A,sol)-np.transpose([b])
