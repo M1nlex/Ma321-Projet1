@@ -346,4 +346,28 @@ def q_3_4_1_2():
     plt.show()
 
 if __name__ == '__main__':
-    q_3_4_1_1()
+    p,q=recup_donnees()
+    A = Det_A(p)
+    b = Det_b(p, q)
+    #x0 = np.array([[0],[0]])
+    x0 = np.array([[-9],[-7]])
+    tol = 10**(-20)
+    sol, xit, nit = GradientPasOptimal(A, b, x0, tol)
+    #print(sol)
+    #print(xit)
+    #print(nit)
+    listeX = []
+    listeY = []
+    for i in xit:
+        listeX.append(i[0])
+        listeY.append(i[1])
+    #print(listeX)
+    #print(listeY)
+
+    """
+    axes = plt.gca()
+    axes.set_xlim(0, 1)
+    axes.set_ylim(0, 1)
+    """
+    plt.plot(listeX,listeY)
+    plt.show()
