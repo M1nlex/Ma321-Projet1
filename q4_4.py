@@ -12,7 +12,6 @@ def get_variables():
     solution = 0
     return p, q, A, b, x0, tol, rho, solution
 
-
 def comparaison_vitesse_convergence():
 
     # Récupération des variables du problème
@@ -23,13 +22,12 @@ def comparaison_vitesse_convergence():
     sol2, xit2, nit2 = GradientPasOptimal(A, b, x0, tol) # méthode du gradient à pas optimal
     sol3, xit3, nit3 = GradientConjugue(A, b, x0, tol) # méthode du gradient conjugué
 
-
-
     vit1 = []
     vit11 = []
     vit2 = []
     vit3 = []
 
+    # Listes des vitesses de convergence par itérations
     for i in range (1,len(xit1)):
         vit1.append( abs( xit1[i][1][0] - solution )/abs( xit1[i-1][1][0] - solution ) )
 
@@ -42,6 +40,7 @@ def comparaison_vitesse_convergence():
     for i in range (1,len(xit3)):
         vit3.append( abs( xit3[i][1][0] - solution )/abs( xit3[i-1][1][0] - solution ) )
 
+    #Affichage des résultats
     plt.subplot(221)
     plt.plot(range(0,len(vit1)) , vit1)
     plt.xlabel("Itération")
