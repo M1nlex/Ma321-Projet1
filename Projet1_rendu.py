@@ -255,17 +255,25 @@ def GradientConjugue(A, b, x0, e):
     nit = 0
     xit = [x0]
     sol = x0
-    r = np.dot(A, x0) - np.transpose([b])
-    d = -r
-    while (nit < itmax and np.linalg.norm(r) > e):
-        a = -np.dot(np.transpose(r), d)[0][0] / np.dot(np.transpose(d), np.dot(A, d))[0][0]
-        sol = sol + a * d
-        beta = np.dot(np.transpose(r), np.dot(A, d))[0][0] / np.dot(np.transpose(d), np.dot(A, d))[0][0]
+    r = np.dot(A, sol) - np.transpose([b])
+
+    while nit < itmax and np.linalg.norm(r) > e:
+
         r = np.dot(A, sol) - np.transpose([b])
-        d = -r + beta * d
+
+        if nit == 0:
+            d = -r
+        else:
+            beta = np.linalg.norm(r) ** 2 / np.linalg.norm(r0) ** 2
+            d = -r + beta * d
+
+        rho = np.dot(r.T, r) / np.dot(np.dot(d.T, A), d)
+        sol = sol + rho * d
         nit += 1
+        r0 = r
+
         xit.append(sol)
-    return (sol, xit, nit)
+    return sol, xit, nit
 
 
 # --------------------------------------
