@@ -7,9 +7,9 @@ def get_variables():
     A = Det_A(p)
     b = Det_b(p, q)
     x0 = np.array([[-9],[-7]])
-    tol = 10**(-10)
+    tol = 10**(-3)
     rho = 10 ** (-3)
-    solution = 0
+    solution = 1
     return p, q, A, b, x0, tol, rho, solution
 
 def comparaison_vitesse_convergence():
@@ -94,59 +94,77 @@ def comparaison_nombre_iterations():
 def comparaison_temps_calcul():
     # Récupération des variables du problème
     p , q , A , b , x0 , tol, rho, solution = get_variables()
+    tot_essai = 20
 
 
-    timelist1 = []
-    timelist2 = []
-    timelist3 = []
+
+    # Moyenne des temps
+    timelist1moy = []
+    timelist2moy = []
+    timelist3moy = []
+
     #precision = range(1,21,1)
     precision = [10,20,30,40]
 
     for i in precision:
+
         # Nouvelle tolérance/précision
         tol = 10**((-1)*i)
 
-        # Récupération des solutions par itérations
-        start_time1 = time.time()
-        sol1, xit1, nit1 = GradientPasFixe(A, b, x0, rho, tol) # méthode du gradient à pas fixe
-        end_time1 = time.time() - start_time1
-        timelist1.append(end_time1)
+        for j in range(0, tot_essai):
 
-        start_time2 = time.time()
-        sol2, xit2, nit2 = GradientPasOptimal(A, b, x0, tol) # méthode du gradient à pas optimal
-        end_time2 = time.time() - start_time2
-        timelist2.append(end_time2)
+            # Liste des temps
+            timelist1 = []
+            timelist2 = []
+            timelist3 = []
 
-        start_time3 = time.time()
-        sol3, xit3, nit3 = GradientConjugue(A, b, x0, tol) # méthode du gradient conjugué
-        end_time3 = time.time() - start_time3
-        timelist3.append(end_time3)
+            # Récupération des solutions par itérations
+            start_time1 = time.time()
+            sol1, xit1, nit1 = GradientPasFixe(A, b, x0, rho, tol) # méthode du gradient à pas fixe
+            end_time1 = time.time() - start_time1
+            timelist1.append(end_time1)
+
+            start_time2 = time.time()
+            sol2, xit2, nit2 = GradientPasOptimal(A, b, x0, tol) # méthode du gradient à pas optimal
+            end_time2 = time.time() - start_time2
+            timelist2.append(end_time2)
+
+            start_time3 = time.time()
+            sol3, xit3, nit3 = GradientConjugue(A, b, x0, tol) # méthode du gradient conjugué
+            end_time3 = time.time() - start_time3
+            timelist3.append(end_time3)
+        timelist1moy.append( sum(timelist1)/tot_essai )
+        timelist2moy.append( sum(timelist2)/tot_essai )
+        timelist3moy.append( sum(timelist3)/tot_essai )
+
+
+
 
     # Affichage des résultats
-    plt.subplot(411)
-    plt.plot(precision,timelist1)
+    plt.subplot(221)
+    plt.plot(precision,timelist1moy)
     plt.xlabel("Degré de précision ( 10^n )")
     plt.ylabel("Temps de calcul")
     plt.title("Temps de calcul en fonction de la précision pour la méthode du gradient à pas fixe")
 
 
-    plt.subplot(412)
-    plt.plot(precision,timelist2)
+    plt.subplot(222)
+    plt.plot(precision,timelist2moy)
     plt.xlabel("Degré de précision ( 10^n )")
     plt.ylabel("Temps de calcul")
     plt.title("Temps de calcul en fonction de la précision pour la méthode du gradient à pas optimal")
 
 
-    plt.subplot(413)
-    plt.plot(precision,timelist3)
+    plt.subplot(223)
+    plt.plot(precision,timelist3moy)
     plt.xlabel("Degré de précision ( 10^n )")
     plt.ylabel("Temps de calcul")
     plt.title("Temps de calcul en fonction de la précision pour la méthode du gradient conjugué")
 
-    plt.subplot(414)
-    plt.plot(precision,timelist1, label='gradient à pas fixe')
-    plt.plot(precision,timelist2, label='gradient à pas optimal')
-    plt.plot(precision,timelist3 ,label='gradient conjugué')
+    plt.subplot(224)
+    plt.plot(precision,timelist1moy, label='gradient à pas fixe')
+    plt.plot(precision,timelist2moy, label='gradient à pas optimal')
+    plt.plot(precision,timelist3moy ,label='gradient conjugué')
     plt.xlabel("Degré de précision ( 10^n )")
     plt.ylabel("Temps de calcul")
     plt.title("Temps de calcul en fonction de la précision pour la méthode du gradient conjugué")
