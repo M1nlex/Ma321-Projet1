@@ -1,5 +1,4 @@
 from Projet1_rendu import *
-from matplotlib.patches import Ellipse
 
 def show_graph1():
     B1 = 1
